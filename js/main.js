@@ -416,11 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.innerHTML = `
                         <div style="text-align: center; width: 100%;">
                             <h3 style="font-size: 2.5rem; color: var(--color-accent); margin-bottom: 0;">${chem}</h3>
-                            <p style="font-family: var(--font-heading); font-style: italic; margin-bottom: 1rem;">Molecule of Life</p>
+                            <p style="font-family: var(--font-heading); font-style: italic; margin-bottom: 1rem;">Plant-derived medicine snapshot</p>
                             <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
                                 <p style="font-size: 1.1rem; line-height: 1.6;">${desc}</p>
                             </div>
-                            <button class="btn-donate" style="background: transparent; border: 1px solid var(--color-text-muted); font-size: 0.8rem; padding: 0.5rem 1rem;">Close Analysis</button>
+                            <button class="btn-donate" style="background: transparent; border: 1px solid var(--color-text-muted); font-size: 0.8rem; padding: 0.5rem 1rem;">Close Card</button>
                         </div>
                     `;
 

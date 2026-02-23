@@ -47,12 +47,49 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
 
         .plant-card:hover {
             transform: translateY(-5px);
             border-color: var(--color-accent);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        .plant-card:focus-within {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(242, 201, 76, 0.15);
+        }
+
+        .plant-card::after {
+            content: 'Opens in place';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 999px;
+            padding: 0.25rem 0.45rem;
+            background: rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateY(-3px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+
+        .plant-card:hover::after,
+        .plant-card:focus-within::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .plant-card.expanded::after {
+            display: none;
         }
 
         .plant-card img {
@@ -68,6 +105,24 @@
         .card-content h3 {
             color: var(--color-accent);
             font-size: 1.5rem;
+        }
+
+        .click-hint {
+            margin-top: 0.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            letter-spacing: 0.03em;
+        }
+
+        .click-hint::before {
+            content: '→';
+            opacity: 0.7;
+            transition: transform 0.2s ease;
+        }
+
+        .plant-card:hover .click-hint::before {
+            transform: translateX(2px);
         }
 
 
@@ -184,9 +239,9 @@
             <div class="container flow-reveal">
                 <div class="section-header">
                     <h2 class="humanity-section-title">The Green Pharmacy</h2>
-                    <span class="ui-pill">Tap To Inspect</span>
+                    <span class="ui-pill">Explore the Stories</span>
                 </div>
-                <p>Over 40% of our modern medicines are derived from plants. Click to explore.</p>
+                <p>Many modern medicines began in plants. Open a card to see how these species shaped human treatment.</p>
                 <!-- Added ID for JS targeting -->
                 <div class="card-grid" id="medicinal-grid">
                     <article class="plant-card" data-chemical="C₉H₈O₄"
@@ -194,8 +249,8 @@
                         <div class="card-content">
                             <h3>Willow Bark</h3>
                             <p><strong>Derived Drug:</strong> Aspirin</p>
-                            <p class="click-hint" style="font-size: 0.8rem; color: var(--color-accent);">Click to
-                                analyze</p>
+                            <p class="click-hint" style="font-size: 0.8rem; color: var(--color-accent);">Open to learn
+                                more</p>
                         </div>
                     </article>
                     <article class="plant-card" data-chemical="C₄₇H₅₁NO₁₄"
@@ -203,8 +258,8 @@
                         <div class="card-content">
                             <h3>Pacific Yew</h3>
                             <p><strong>Derived Drug:</strong> Taxol</p>
-                            <p class="click-hint" style="font-size: 0.8rem; color: var(--color-accent);">Click to
-                                analyze</p>
+                            <p class="click-hint" style="font-size: 0.8rem; color: var(--color-accent);">Open to learn
+                                more</p>
                         </div>
                     </article>
                     <article class="plant-card" data-chemical="C₂₀H₂₄N₂O₂"
@@ -212,8 +267,8 @@
                         <div class="card-content">
                             <h3>Cinchona Tree</h3>
                             <p><strong>Derived Drug:</strong> Quinine</p>
-                            <p class="click-hint" style="font-size: 0.8rem; color: var(--color-accent);">Click to
-                                analyze</p>
+                            <p class="click-hint" style="font-size: 0.8rem; color: var(--color-accent);">Open to learn
+                                more</p>
                         </div>
                     </article>
                 </div>
