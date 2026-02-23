@@ -30,6 +30,51 @@
             padding: var(--spacing-lg);
             border-left: 4px solid var(--color-alert);
         }
+
+        .threats-page-title {
+            margin-bottom: 0.75rem;
+        }
+
+        .threats-section-title {
+            margin-bottom: 0.35rem;
+        }
+
+        .threats-hope-title {
+            font-size: clamp(2.1rem, 5vw, 3rem);
+            color: #1a1a1a;
+            margin-bottom: 1.25rem;
+        }
+
+        .threats-hope-copy {
+            font-size: clamp(1.05rem, 2vw, 1.5rem);
+            color: #2e4a33;
+            max-width: 700px;
+            margin: 0 auto 2.25rem;
+        }
+
+        @media (max-width: 900px) {
+            .comparison-section {
+                padding: 2.5rem 0;
+            }
+
+            .impact-grid {
+                gap: 1rem;
+                padding: 1.25rem 0;
+            }
+
+            .impact-card {
+                padding: 1rem;
+            }
+
+            .vanishing-container {
+                margin: 20px auto !important;
+                border-radius: 14px !important;
+            }
+
+            #hope-section {
+                padding: 72px 0 !important;
+            }
+        }
     </style>
 </head>
 
@@ -48,23 +93,20 @@
         </div>
     </nav>
 
-    <div class="creator-banner" role="note" aria-label="Copyright and creator notice">
-        <div class="container">
-            <p><strong>&copy; 2026 PlantLife&trade;</strong> All Rights Reserved. Website Creator:
-                <strong>Luggya Phillip Reuben</strong>.</p>
-        </div>
-    </div>
-
     <main style="padding-top: 80px;">
         <div class="container" style="text-align: center; margin-bottom: var(--spacing-lg);">
-            <h1>The Vanishing</h1>
+            <div class="ui-pill" style="margin: 0 auto 1rem; width: fit-content;">Chapter 3 · Threats</div>
+            <h1 class="threats-page-title">The Vanishing</h1>
             <p>Every second, a forest the size of a football field is lost. We are trading long-term survival for
                 short-term gain.</p>
         </div>
 
-        <section class="comparison-section" aria-label="Deforestation Comparison" id="vanishing-section">
-            <div class="container">
-                <h2>Witness the Change</h2>
+        <section class="comparison-section flow-reveal" aria-label="Deforestation Comparison" id="vanishing-section">
+            <div class="container flow-reveal">
+                <div class="section-header">
+                    <h2 class="threats-section-title">Witness the Change</h2>
+                    <span class="ui-pill">Drag To Compare</span>
+                </div>
                 <p>Drag the slider. Watch the world burn.</p>
                 <p class="ui-note compact">Slide left or right to compare forest health versus deforestation.</p>
 
@@ -92,7 +134,13 @@
             </div>
         </section>
 
-        <section class="container">
+        <div class="flow-bridge flow-reveal" aria-hidden="true">
+            <div class="flow-kicker">From Visual Shock to System Damage</div>
+            <p>The disappearing forest is not only scenery loss. It triggers measurable biodiversity decline and climate feedback.</p>
+            <span class="flow-line"></span>
+        </div>
+
+        <section class="container flow-reveal">
             <div class="impact-grid">
                 <div class="impact-card" id="biodiversity-card">
                     <h3>Biodiversity Loss</h3>
@@ -117,19 +165,39 @@
     </main>
 
     <!-- Hope Section (Visual TransitionTarget) -->
-    <section id="hope-section"
+    <div class="flow-bridge flow-reveal" aria-hidden="true">
+        <div class="flow-kicker">From Damage to Recovery</div>
+        <p>The story does not end with collapse. Recovery begins when destruction slows and restoration accelerates.</p>
+        <span class="flow-line"></span>
+    </div>
+
+    <section id="hope-section" class="flow-reveal"
         style="padding: 100px 0; text-align: center; opacity: 0; transform: translateY(50px); transition: all 1s ease;">
         <div class="container">
-            <h2 style="font-size: 3rem; color: #1a1a1a; margin-bottom: 2rem;">But Life is Resilient.</h2>
-            <p style="font-size: 1.5rem; color: #2e4a33; max-width: 700px; margin: 0 auto 3rem;">
-                When we stop the destruction, nature returns.
-                <br><strong>Forests can heal.</strong>
+            <div class="ui-pill" style="margin: 0 auto 1rem; width: fit-content; border-color: rgba(46,74,51,0.35); color: #2e4a33; background: rgba(46,74,51,0.08);">Chapter 4 · Act</div>
+            <h2 class="threats-hope-title">But Life is Resilient.</h2>
+            <p class="threats-hope-copy">
+                When we stop the destruction, nature returns. <strong>Forests can heal.</strong>
             </p>
             <a href="protect.html" class="btn-donate"
                 style="background: #2e4a33; color: white; padding: 1rem 3rem; font-size: 1.2rem; display: inline-block;">Start
                 the Healing</a>
         </div>
     </section>
+
+    <div class="chapter-next flow-reveal" aria-label="Continue to action chapter">
+        <div class="chapter-next-inner">
+            <div class="chapter-next-copy">
+                <div class="ui-pill" style="margin-bottom: 0.6rem;">Next Chapter · Act</div>
+                <h3>Turn concern into action</h3>
+                <p>Use the impact simulator to connect contribution size with visible ecosystem recovery outcomes.</p>
+            </div>
+            <div class="chapter-next-actions">
+                <a href="protect.html" class="btn-donate">Continue to Act</a>
+                <a href="#vanishing-section" class="btn-secondary" style="text-decoration: none;">Revisit Comparison</a>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer" aria-label="Site copyright">
         <div class="container">

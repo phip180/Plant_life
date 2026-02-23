@@ -197,6 +197,68 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
+
+        .protect-page-title {
+            font-size: clamp(2.35rem, 5vw, 4rem);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .protect-subtitle {
+            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-bottom: 2.25rem;
+        }
+
+        @media (max-width: 900px) {
+            .protect-hero {
+                padding: 1rem 0.5rem 1.25rem;
+            }
+
+            .impact-simulator {
+                margin: 20px auto;
+                border-radius: 18px;
+            }
+
+            .glass-panel {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .seed-container {
+                width: 88px;
+                height: 88px;
+                margin-bottom: 0.75rem;
+            }
+
+            .protect-page-title {
+                margin-bottom: 0.35rem;
+            }
+
+            .protect-subtitle {
+                font-size: 0.98rem;
+                margin-bottom: 1.25rem;
+            }
+
+            #reforest-canvas {
+                min-height: 280px !important;
+            }
+
+            .slider-container {
+                padding: 12px 0 !important;
+            }
+
+            #floating-price {
+                top: -28px !important;
+                padding: 4px 10px !important;
+            }
+
+            .trust-badge {
+                display: grid;
+                gap: 0.35rem;
+                margin-top: 0.75rem;
+            }
+        }
     </style>
 </head>
 
@@ -215,23 +277,15 @@
         </div>
     </nav>
 
-    <div class="creator-banner" role="note" aria-label="Copyright and creator notice">
-        <div class="container">
-            <p><strong>&copy; 2026 PlantLife&trade;</strong> All Rights Reserved. Website Creator:
-                <strong>Luggya Phillip Reuben</strong>.</p>
-        </div>
-    </div>
-
-    <main class="protect-hero">
-        <div class="container">
+    <main class="protect-hero flow-reveal">
+        <div class="container flow-reveal">
             <div class="seed-container">
                 <img src="assets/seedling.png" alt="A sprouting seedling" class="seed-img">
             </div>
 
-            <h1
-                style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-                Be The Soil For The Future</h1>
-            <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 3rem;">Hope is an action. Your contribution plants
+            <div class="ui-pill" style="display: inline-flex; margin-bottom: 1rem;">Chapter 4 · Act</div>
+            <h1 class="protect-page-title">Be the Soil for the Future</h1>
+            <p class="protect-subtitle">Hope is an action. Your contribution plants
                 the seeds of tomorrow.</p>
 
             <!-- Impact Simulator Container -->
@@ -245,7 +299,7 @@
                 <div class="glass-panel">
 
                     <div
-                        style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                        style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap;">
                         <div style="text-align: left;">
                             <span class="label-text">Your Contribution</span>
                             <!-- Placeholder for layout balance, value is on slider now, or we show both? -->
@@ -262,6 +316,7 @@
                             <span id="impact-text" class="impact-text-display" aria-live="polite">Restores 1 Acre</span>
                         </div>
                     </div>
+                    <p class="ui-note" style="margin-top: 0; margin-bottom: 0;">Move the slider to see how support scales from individual trees to ecosystem recovery.</p>
 
                     <!-- Slider Container -->
                     <div class="slider-container" style="position: relative; padding: 20px 0;">
@@ -297,7 +352,27 @@
                 <span>✓ 501(c)(3) Tax Deductible (Mock)</span>
             </div>
         </div>
+
+        <div class="flow-bridge flow-reveal" aria-hidden="true" style="margin-top: 1.5rem; margin-bottom: 0;">
+            <div class="flow-kicker">Close the Loop</div>
+            <p>Action matters most when it stays connected to understanding. Revisit the story and follow the chain again with new context.</p>
+            <span class="flow-line"></span>
+        </div>
     </main>
+
+    <div class="chapter-next flow-reveal" aria-label="Continue exploring">
+        <div class="chapter-next-inner">
+            <div class="chapter-next-copy">
+                <div class="ui-pill" style="margin-bottom: 0.6rem;">Continue Exploring</div>
+                <h3>Return to the beginning, with the whole system in mind</h3>
+                <p>Start again from Life or revisit Humanity and Threats to see how each chapter feeds the next.</p>
+            </div>
+            <div class="chapter-next-actions">
+                <a href="index.html" class="btn-donate">Back to Life</a>
+                <a href="humanity.html" class="btn-secondary" style="text-decoration: none;">Revisit Humanity</a>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer" aria-label="Site copyright">
         <div class="container">

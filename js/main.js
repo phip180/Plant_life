@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    requestAnimationFrame(() => {
+        document.body.classList.add('page-loaded');
+    });
 
     // --- 1. GLOBAL UI ---
     // Parallax Effect
@@ -37,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            nav.style.background = 'rgba(15, 47, 24, 0.95)';
-            nav.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            nav.style.background = 'rgba(6, 18, 10, 0.9)';
+            nav.style.boxShadow = '0 14px 32px rgba(0,0,0,0.28)';
         } else {
-            nav.style.background = 'rgba(15, 47, 24, 0.7)';
-            nav.style.boxShadow = 'none';
+            nav.style.background = 'rgba(6, 18, 10, 0.72)';
+            nav.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.22)';
         }
     });
 
@@ -56,7 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.stat-card, .process-viz, .timeline-node').forEach(el => {
+    document.querySelectorAll('.stat-card, .process-viz, .timeline-node, .flow-reveal').forEach((el, index) => {
+        if (el.classList.contains('flow-reveal')) {
+            el.style.setProperty('--flow-delay', `${(index % 5) * 60}ms`);
+        }
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
@@ -180,6 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressSpan = document.getElementById('synthesis-progress');
     const oxyBurst = document.getElementById('output-oxygen');
     const stage = document.querySelector('.living-leaf-stage');
+    const phaseChip = document.getElementById('synthesis-phase-chip');
+    const phaseTitle = document.getElementById('synthesis-phase-title');
+    const phaseCopy = document.getElementById('synthesis-phase-copy');
+    const impactCopy = document.getElementById('synthesis-impact-copy');
+    const inputsText = document.getElementById('synthesis-inputs');
+    const outputText = document.getElementById('synthesis-output');
+    const meaningText = document.getElementById('synthesis-meaning');
+    const stageLabel = document.getElementById('synthesis-stage-label');
+    const progressFill = document.getElementById('synthesis-progress-fill');
+    const marker1 = document.getElementById('synthesis-marker-1');
+    const marker2 = document.getElementById('synthesis-marker-2');
+    const marker3 = document.getElementById('synthesis-marker-3');
 
     // Particle Spawner
     function spawnParticle(type, startX, startY, destX, destY) {
@@ -207,6 +225,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (photoSection) {
+        const setSynthesisNarrative = (progress) => {
+            if (!phaseTitle || !phaseCopy) return;
+            if (progressFill) progressFill.style.width = `${progress}%`;
+
+            [marker1, marker2, marker3].forEach(m => m && m.classList.remove('active'));
+
+            if (progress < 35) {
+                if (marker1) marker1.classList.add('active');
+                if (phaseChip) phaseChip.innerText = 'Phase 1 · Capture';
+                if (stageLabel) stageLabel.innerText = 'Capturing inputs';
+                phaseTitle.innerText = 'The leaf gathers energy and raw materials';
+                phaseCopy.innerText = 'Sunlight, water, and carbon dioxide are drawn into the process. This intake stage is the foundation of plant-powered life.';
+                if (impactCopy) impactCopy.innerText = 'Without this first step, there is no food web, no plant growth, and no reliable oxygen cycle to sustain complex life.';
+                if (inputsText) inputsText.innerText = 'Light + Water + CO₂';
+                if (outputText) outputText.innerText = 'Pending';
+                if (meaningText) meaningText.innerText = 'Breath starts here';
+            } else if (progress < 75) {
+                if (marker2) marker2.classList.add('active');
+                if (phaseChip) phaseChip.innerText = 'Phase 2 · Convert';
+                if (stageLabel) stageLabel.innerText = 'Converting energy';
+                phaseTitle.innerText = 'Energy is converted into stored life';
+                phaseCopy.innerText = 'Inside the leaf, light energy drives chemical reactions that build sugars. Plants store energy before ecosystems can use it.';
+                if (impactCopy) impactCopy.innerText = 'This conversion is the hidden supply chain behind crops, forests, medicines, fibers, and nearly every land-based food system.';
+                if (inputsText) inputsText.innerText = 'Light drives reaction';
+                if (outputText) outputText.innerText = 'Glucose forming';
+                if (meaningText) meaningText.innerText = 'Food + growth';
+            } else {
+                if (marker3) marker3.classList.add('active');
+                if (phaseChip) phaseChip.innerText = 'Phase 3 · Release';
+                if (stageLabel) stageLabel.innerText = 'Releasing oxygen';
+                phaseTitle.innerText = 'Oxygen and stored energy support the world above the leaf';
+                phaseCopy.innerText = 'As the process completes, oxygen is released and plant biomass accumulates. The result powers breathing, habitats, and climate regulation.';
+                if (impactCopy) impactCopy.innerText = 'This is where the whole site connects: human survival, forest loss risk, and conservation action all depend on protecting this engine.';
+                if (inputsText) inputsText.innerText = 'Cycle sustained';
+                if (outputText) outputText.innerText = 'O₂ + Biomass';
+                if (meaningText) meaningText.innerText = 'Climate buffer';
+            }
+        };
+
         window.addEventListener('scroll', () => {
             const rect = photoSection.getBoundingClientRect();
             const center = window.innerHeight / 2;
@@ -218,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 progress = Math.min(Math.max(progress, 0), 1) * 100;
 
                 if (progressSpan) progressSpan.innerText = Math.floor(progress) + '%';
+                setSynthesisNarrative(progress);
 
                 // Scale leaf
                 if (leafCore) {
@@ -297,6 +355,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Soft page transitions for internal navigation
+    document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+            let url;
+            try {
+                url = new URL(href, window.location.href);
+            } catch {
+                return;
+            }
+
+            const isSameOrigin = url.origin === window.location.origin;
+            const isHtmlPage = url.pathname.endsWith('.html') || !url.pathname.includes('.');
+            if (!isSameOrigin || !isHtmlPage) return;
+
+            e.preventDefault();
+            document.body.classList.add('page-leaving');
+            setTimeout(() => {
+                window.location.href = url.href;
+            }, 260);
+        });
+    });
 
     // --- 7. PAGE 2: DEEP ZOOM CARDS ---
     const cards = document.querySelectorAll('.plant-card');

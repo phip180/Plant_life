@@ -52,6 +52,212 @@
             justify-content: center;
             position: relative;
         }
+
+        .process-story-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--spacing-lg);
+            align-items: start;
+            margin-top: var(--spacing-xl);
+        }
+
+        .process-panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 1.25rem;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .phase-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            border: 1px solid rgba(242, 201, 76, 0.3);
+            background: rgba(242, 201, 76, 0.08);
+        }
+
+        .phase-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin: 0.9rem 0 0.35rem;
+            color: var(--color-text-main);
+        }
+
+        .phase-copy {
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .phase-links {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .phase-link {
+            display: block;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 0.85rem 0.95rem;
+            background: rgba(255, 255, 255, 0.02);
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+            color: var(--color-text-main);
+        }
+
+        .phase-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(242, 201, 76, 0.3);
+            background: rgba(242, 201, 76, 0.04);
+        }
+
+        .phase-link strong {
+            display: block;
+            color: var(--color-accent);
+            margin-bottom: 0.15rem;
+            letter-spacing: 0.03em;
+        }
+
+        .phase-link span {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .process-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .mini-stat {
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.75rem;
+        }
+
+        .mini-stat-label {
+            display: block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-muted);
+        }
+
+        .mini-stat-value {
+            display: block;
+            margin-top: 0.3rem;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--color-accent);
+        }
+
+        .synthesis-hud {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: 18px;
+            z-index: 15;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 0.85rem 0.9rem;
+            backdrop-filter: blur(8px);
+            text-align: left;
+        }
+
+        .synthesis-hud-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.55rem;
+            flex-wrap: wrap;
+        }
+
+        .synthesis-hud-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .synthesis-hud-phase {
+            color: var(--color-accent);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .synthesis-progress-track {
+            position: relative;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            margin-bottom: 0.65rem;
+        }
+
+        .synthesis-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #FFD700, #7ED957, #D8FFFF);
+            border-radius: inherit;
+            box-shadow: 0 0 14px rgba(242, 201, 76, 0.35);
+            transition: width 0.15s ease-out;
+        }
+
+        .synthesis-phase-markers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .synthesis-phase-marker {
+            font-size: 0.72rem;
+            padding: 0.35rem 0.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.02);
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .synthesis-phase-marker.active {
+            color: var(--color-text-main);
+            border-color: rgba(242, 201, 76, 0.28);
+            background: rgba(242, 201, 76, 0.08);
+        }
+
+        @media (max-width: 900px) {
+            .process-story-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-mini-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .synthesis-hud {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                padding: 0.7rem;
+            }
+
+            .synthesis-phase-markers {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -70,13 +276,6 @@
         </div>
     </nav>
 
-    <div class="creator-banner" role="note" aria-label="Copyright and creator notice">
-        <div class="container">
-            <p><strong>&copy; 2026 PlantLife&trade;</strong> All Rights Reserved. Website Creator:
-                <strong>Luggya Phillip Reuben</strong>.</p>
-        </div>
-    </div>
-
     <main id="main-content">
         <header class="hero">
             <img src="assets/hero.png" alt="A lush, ancient forest with sunlight filtering through canopy"
@@ -85,17 +284,23 @@
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"></canvas>
 
             <div class="container hero-content">
+                <div class="ui-pill" style="margin: 0 auto 1rem; width: fit-content;">Chapter 1 · Life</div>
                 <h1>The Breath of the World</h1>
-                <p>Before us, before history, there was the forest.<br>Every breath you take was a gift from them.</p>
-                <div style="margin-top: 2rem;">
+                <p>Before us, before history, there was the forest. Every breath you take was a gift from it.</p>
+                <div style="margin-top: 2rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#breathe" class="nav-link"
                         style="border-bottom: 1px solid var(--color-text-main);">Explore</a>
+                    <a href="protect.html" class="btn-donate">Take Action Now</a>
                 </div>
             </div>
         </header>
 
-        <section id="breathe" class="stats-section">
-            <div class="container">
+        <section id="breathe" class="stats-section flow-reveal">
+            <div class="container flow-reveal">
+                <div class="section-header">
+                    <h2>Planetary Dependence</h2>
+                    <span class="ui-pill">Systems View</span>
+                </div>
                 <div class="stat-grid" id="stat-grid">
                     <div class="stat-card">
                         <h3>98%</h3>
@@ -123,11 +328,18 @@
         </section>
 
         <!-- Photosynthesis Scrollytelling Section -->
-        <section class="process-viz" id="photosynthesis">
-            <div class="container" style="text-align: center; position: relative;">
+        <div class="flow-bridge flow-reveal" aria-hidden="true">
+            <div class="flow-kicker">From Scale to Mechanism</div>
+            <p>These global numbers exist because millions of leaves quietly run the same process every day.</p>
+            <span class="flow-line"></span>
+        </div>
+
+        <section class="process-viz flow-reveal" id="photosynthesis">
+            <div class="container flow-reveal" style="text-align: center; position: relative;">
                 <div style="margin-bottom: var(--spacing-xl);">
+                    <div class="ui-pill" style="margin: 0 auto 1rem; width: fit-content;">Interactive · Scroll</div>
                     <h2>An Invisible Engine</h2>
-                    <p>Scroll to see how light becomes life.</p>
+                    <p>Scroll to watch photosynthesis happen, then see why it powers every chapter of this story.</p>
                 </div>
 
                 <!-- Animation Stage -->
@@ -200,15 +412,85 @@
                             style="font-size: 3rem; display: inline-block; vertical-align: middle; margin-left: 1rem;">💨</span>
                     </div>
 
-                    <!-- Progress Bar -->
-                    <div class="scroll-prompt"
-                        style="position: absolute; bottom: 20px; width: 100%; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5);">
-                        Photosynthesis: <span id="synthesis-progress" aria-live="polite"
-                            style="color: var(--color-accent);">0%</span>
+                    <div class="synthesis-hud" aria-label="Photosynthesis progress panel">
+                        <div class="synthesis-hud-top">
+                            <div class="synthesis-hud-label">
+                                Photosynthesis: <span id="synthesis-progress" aria-live="polite"
+                                    style="color: var(--color-accent);">0%</span>
+                            </div>
+                            <div class="synthesis-hud-phase" id="synthesis-stage-label">Capturing inputs</div>
+                        </div>
+                        <div class="synthesis-progress-track" aria-hidden="true">
+                            <div class="synthesis-progress-fill" id="synthesis-progress-fill"></div>
+                        </div>
+                        <div class="synthesis-phase-markers" aria-hidden="true">
+                            <div class="synthesis-phase-marker active" id="synthesis-marker-1">Capture</div>
+                            <div class="synthesis-phase-marker" id="synthesis-marker-2">Convert</div>
+                            <div class="synthesis-phase-marker" id="synthesis-marker-3">Release</div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="process-story-grid">
+                    <div class="process-panel">
+                        <span class="phase-chip" id="synthesis-phase-chip">Phase 1 · Capture</span>
+                        <h3 class="phase-title" id="synthesis-phase-title">The leaf gathers energy and raw materials</h3>
+                        <p class="phase-copy" id="synthesis-phase-copy">
+                            Sunlight, water, and carbon dioxide are pulled into the system. This is the intake stage that makes life production possible.
+                        </p>
+                        <div class="process-mini-grid">
+                            <div class="mini-stat">
+                                <span class="mini-stat-label">Inputs</span>
+                                <span class="mini-stat-value" id="synthesis-inputs">Light + Water + CO₂</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-stat-label">Output</span>
+                                <span class="mini-stat-value" id="synthesis-output">Pending</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-stat-label">Human Meaning</span>
+                                <span class="mini-stat-value" id="synthesis-meaning">Breath starts here</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="process-panel" aria-label="Why this matters">
+                        <div class="ui-pill" style="margin-bottom: 0.8rem;">Why This Matters</div>
+                        <p id="synthesis-impact-copy" class="phase-copy" style="margin-bottom: 0.75rem;">
+                            Photosynthesis is the upstream process behind food, medicine, forest resilience, and climate stability.
+                        </p>
+                        <div class="phase-links">
+                            <a href="humanity.html" class="phase-link">
+                                <strong>Humanity</strong>
+                                <span>Plants become food systems, medicine, materials, and civilization infrastructure.</span>
+                            </a>
+                            <a href="threats.html" class="phase-link">
+                                <strong>Threats</strong>
+                                <span>Destroying forests weakens oxygen production, biodiversity, and carbon capture capacity.</span>
+                            </a>
+                            <a href="protect.html" class="phase-link">
+                                <strong>Act Now</strong>
+                                <span>Protecting plant systems protects the engine that supports every other outcome.</span>
+                            </a>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </section>
+
+        <div class="chapter-next flow-reveal" aria-label="Continue to next chapter">
+            <div class="chapter-next-inner">
+                <div class="chapter-next-copy">
+                    <div class="ui-pill" style="margin-bottom: 0.6rem;">Next Chapter · Humanity</div>
+                    <h3>Follow the energy into human life</h3>
+                    <p>See how this same plant engine becomes food systems, medicine, materials, and civilization.</p>
+                </div>
+                <div class="chapter-next-actions">
+                    <a href="humanity.html" class="btn-donate">Continue to Humanity</a>
+                    <a href="#breathe" class="btn-secondary" style="text-decoration: none;">Revisit the Stats</a>
+                </div>
+            </div>
+        </div>
 
     </main>
 

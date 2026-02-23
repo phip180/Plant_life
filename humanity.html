@@ -81,6 +81,27 @@
             margin: var(--spacing-xxl) auto;
             color: var(--color-text-muted);
         }
+
+        .humanity-hero-title {
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            line-height: 0.95;
+            margin-bottom: 0.75rem;
+        }
+
+        .humanity-section-title {
+            margin-bottom: 0.35rem;
+        }
+
+        .humanity-timeline-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .humanity-timeline-title {
+                margin-bottom: 2rem;
+            }
+        }
     </style>
 </head>
 
@@ -99,13 +120,6 @@
         </div>
     </nav>
 
-    <div class="creator-banner" role="note" aria-label="Copyright and creator notice">
-        <div class="container">
-            <p><strong>&copy; 2026 PlantLife&trade;</strong> All Rights Reserved. Website Creator:
-                <strong>Luggya Phillip Reuben</strong>.</p>
-        </div>
-    </div>
-
     <main style="padding-top: 0;">
         <!-- Refined Hero with Visual Blend -->
         <section class="split-hero"
@@ -118,20 +132,25 @@
 
             <div class="container"
                 style="position: relative; z-index: 2; display: flex; height: 100%; align-items: center;">
-                <div class="hero-text" style="max-width: 50%; padding-right: 2rem; background: transparent;">
-                    <h1 style="font-size: 5rem; line-height: 1;">Woven<br>Together</h1>
+                <div class="hero-text" style="max-width: 560px; width: 100%; padding-right: 2rem; background: transparent;">
+                    <div class="ui-pill" style="margin-bottom: 1rem;">Chapter 2 · Humanity</div>
+                    <h1 class="humanity-hero-title">Woven Together</h1>
                     <p style="font-size: 1.25rem; color: var(--color-text-muted); margin-top: 2rem;">Human history is
                         the history of seeds. From the empires built on wheat to the cures found in bark, we are
                         inextricably bound to the botanical world.</p>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <a href="#medicinal-grid" class="btn-donate">Explore Medicines</a>
+                        <a href="threats.html" class="btn-secondary" style="text-decoration: none;">See Threats</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- New Section: Daily Reliance Calculator -->
-        <section class="dependency-section" style="padding: var(--spacing-xxl) 0; background: #0A2215;">
-            <div class="container" style="text-align: center;">
+        <section class="dependency-section flow-reveal" style="padding: var(--spacing-xxl) 0; background: #0A2215;">
+            <div class="container flow-reveal" style="text-align: center;">
                 <div class="section-header">
-                    <h2>How Plant-Powered Are You?</h2>
+                    <h2 class="humanity-section-title">How Plant-Powered Are You?</h2>
                     <button id="calc-reset" class="btn-secondary" type="button">Reset Checklist</button>
                 </div>
                 <p>Check what you've done today to see your connection.</p>
@@ -155,9 +174,18 @@
             </div>
         </section>
 
-        <section class="medicinal-section">
-            <div class="container">
-                <h2>The Green Pharmacy</h2>
+        <div class="flow-bridge flow-reveal" aria-hidden="true">
+            <div class="flow-kicker">From Daily Habits to Deep Systems</div>
+            <p>Your everyday choices are surface-level signals of a much larger dependency: plants underpin medicine, trade, and infrastructure.</p>
+            <span class="flow-line"></span>
+        </div>
+
+        <section class="medicinal-section flow-reveal">
+            <div class="container flow-reveal">
+                <div class="section-header">
+                    <h2 class="humanity-section-title">The Green Pharmacy</h2>
+                    <span class="ui-pill">Tap To Inspect</span>
+                </div>
                 <p>Over 40% of our modern medicines are derived from plants. Click to explore.</p>
                 <!-- Added ID for JS targeting -->
                 <div class="card-grid" id="medicinal-grid">
@@ -193,9 +221,18 @@
         </section>
 
         <!-- Vertical Root Timeline -->
-        <section class="timeline-section" style="position: relative;">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 4rem;">Roots of Civilization</h2>
+        <div class="flow-bridge flow-reveal" aria-hidden="true">
+            <div class="flow-kicker">From Molecules to History</div>
+            <p>Plants do not just support individual bodies. They shape empires, trade routes, and the long arc of civilization.</p>
+            <span class="flow-line"></span>
+        </div>
+
+        <section class="timeline-section flow-reveal" style="position: relative;">
+            <div class="container flow-reveal">
+                <div class="section-header" style="justify-content: center; margin-bottom: 2rem;">
+                    <span class="ui-pill">Timeline</span>
+                </div>
+                <h2 class="humanity-timeline-title">Roots of Civilization</h2>
 
                 <!-- The Central Root Line -->
                 <div class="root-line"
@@ -210,7 +247,7 @@
                     <div class="timeline-node left">
                         <div class="node-content">
                             <h4>10,000 BCE</h4>
-                            <p><strong>The First Harvest</strong><br>Humans begin domesticating wheat and barley. We
+                            <p><strong>The First Harvest.</strong> Humans begin domesticating wheat and barley. We
                                 stop wandering and start building.</p>
                         </div>
                     </div>
@@ -219,7 +256,7 @@
                     <div class="timeline-node right">
                         <div class="node-content">
                             <h4>3,000 BCE</h4>
-                            <p><strong>Written Word</strong><br>Papyrus reeds in Egypt allow knowledge to travel across
+                            <p><strong>Written Word.</strong> Papyrus reeds in Egypt allow knowledge to travel across
                                 time. History begins.</p>
                         </div>
                     </div>
@@ -228,7 +265,7 @@
                     <div class="timeline-node left">
                         <div class="node-content">
                             <h4>1600s</h4>
-                            <p><strong>Global Exchange</strong><br>Potatoes and corn cross the ocean, ending famines and
+                            <p><strong>Global Exchange.</strong> Potatoes and corn cross the ocean, ending famines and
                                 fueling population explosions.</p>
                         </div>
                     </div>
@@ -237,7 +274,7 @@
                     <div class="timeline-node right">
                         <div class="node-content">
                             <h4>Today</h4>
-                            <p><strong>Biotechnology</strong><br>We edit plant genomes to help them survive the changing
+                            <p><strong>Biotechnology.</strong> We edit plant genomes to help them survive the changing
                                 climate we created.</p>
                         </div>
                     </div>
@@ -245,12 +282,26 @@
             </div>
         </section>
 
-        <div class="container">
+        <div class="container flow-reveal">
             <blockquote class="quote-box">
                 "The earth does not belong to man; man belongs to the earth."
                 <footer style="font-size: 1rem; margin-top: 1rem; color: var(--color-accent);">&mdash; Chief Seattle
                     (Attributed)</footer>
             </blockquote>
+        </div>
+
+        <div class="chapter-next flow-reveal" aria-label="Continue to threats chapter">
+            <div class="chapter-next-inner">
+                <div class="chapter-next-copy">
+                    <div class="ui-pill" style="margin-bottom: 0.6rem;">Next Chapter · Threats</div>
+                    <h3>What happens when the system breaks?</h3>
+                    <p>Move from dependency to consequence and see how plant loss affects biodiversity and climate stability.</p>
+                </div>
+                <div class="chapter-next-actions">
+                    <a href="threats.html" class="btn-donate">Continue to Threats</a>
+                    <a href="#medicinal-grid" class="btn-secondary" style="text-decoration: none;">Revisit Medicines</a>
+                </div>
+            </div>
         </div>
 
     </main>
