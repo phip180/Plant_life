@@ -1,0 +1,652 @@
+:root {
+    /* Colors */
+    --color-primary: #0F2F18;
+    /* Deep Forest Green */
+    --color-primary-light: #1A4D2E;
+    --color-accent: #F2C94C;
+    /* Sunlight Gold */
+    --color-text-main: #F9F7F0;
+    /* Off-white */
+    --color-text-muted: #B0C4B1;
+    --color-alert: #E07A5F;
+    /* Terracotta */
+    --color-bg: #05140A;
+    /* Darker than primary for backgrounds */
+
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+    --spacing-xxl: 8rem;
+
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-slow: 0.8s ease-out;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.life-toggled {
+    filter: grayscale(1) saturate(0.2) brightness(0.75) contrast(0.9);
+    transition: filter var(--transition-fast);
+}
+
+body.life-toggled .hero-bg,
+body.life-toggled .living-leaf-stage {
+    opacity: 0.7;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 4rem;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    max-width: 70ch;
+}
+
+/* Utilities */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: var(--spacing-md) 0;
+    backdrop-filter: blur(10px);
+    background: rgba(15, 47, 24, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform var(--transition-fast);
+}
+
+.creator-banner {
+    margin-top: 80px;
+    padding: 0.75rem 0;
+    background: linear-gradient(90deg, rgba(242, 201, 76, 0.16), rgba(15, 47, 24, 0.9));
+    border-bottom: 1px solid rgba(242, 201, 76, 0.25);
+}
+
+.creator-banner p {
+    margin: 0;
+    max-width: none;
+    text-align: center;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+.creator-banner strong {
+    color: var(--color-accent);
+}
+
+.site-footer {
+    margin-top: var(--spacing-xl);
+    padding: 1.25rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.site-footer p {
+    margin: 0;
+    max-width: none;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.creator-watermark {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 2000;
+    background: rgba(5, 20, 10, 0.88);
+    color: var(--color-text-main);
+    border: 1px solid rgba(242, 201, 76, 0.35);
+    border-radius: 999px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+}
+
+.creator-watermark strong {
+    color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+    .creator-watermark {
+        right: 8px;
+        bottom: 8px;
+        font-size: 0.68rem;
+        padding: 0.35rem 0.6rem;
+    }
+}
+
+.main-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-text-main);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    list-style: none;
+    align-items: center;
+}
+
+.nav-toggle {
+    display: none;
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-text-main);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: var(--color-text-main);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    padding: 0.25rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+    transition: width var(--transition-fast);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.btn-donate {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-donate:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-donate:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-main);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-accent);
+    background: rgba(242, 201, 76, 0.06);
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+.ui-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(242, 201, 76, 0.28);
+    background: rgba(242, 201, 76, 0.08);
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.ui-note {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+.ui-note.compact {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.section-header > * {
+    margin-bottom: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.calc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+    cursor: pointer;
+}
+
+.calc-item:hover {
+    border-color: rgba(242, 201, 76, 0.35);
+    background: rgba(242, 201, 76, 0.05);
+    transform: translateY(-1px);
+}
+
+.calc-item:focus-within {
+    border-color: var(--color-accent);
+    background: rgba(242, 201, 76, 0.07);
+}
+
+/* Hero Section (Global Base) */
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    transform: scale(1.1);
+    /* For parallax */
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 10;
+    margin-top: var(--spacing-xxl);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.5s ease-out forwards 0.5s;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Vertical Timeline Fix */
+.timeline-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 4rem 0;
+    position: relative;
+    width: 100%;
+}
+
+.timeline-node {
+    width: 50%;
+    position: relative;
+    padding-bottom: 4rem;
+    box-sizing: border-box;
+    /* Clear floating/flex issues */
+    float: none;
+}
+
+/* Left Items */
+.timeline-node.left {
+    align-self: flex-start;
+    padding-right: 4rem;
+    text-align: right;
+    margin-right: auto;
+    /* Ensure it stays left */
+}
+
+/* Right Items */
+.timeline-node.right {
+    align-self: flex-end;
+    padding-left: 4rem;
+    text-align: left;
+    margin-left: auto;
+    /* Ensure it stays right */
+}
+
+/* Central Node Dot */
+.timeline-node::before {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    width: 16px;
+    height: 16px;
+    background: #05140A;
+    border: 2px solid var(--color-text-muted);
+    border-radius: 50%;
+    z-index: 10;
+    transition: all 0.5s ease;
+}
+
+/* Positioning */
+.timeline-node.left::before {
+    right: -8px;
+}
+
+.timeline-node.right::before {
+    left: -8px;
+}
+
+/* The "Branch" Connector */
+.timeline-node::after {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    height: 2px;
+    width: 3rem;
+    background: var(--color-text-muted);
+    opacity: 0.3;
+    transition: all 0.5s ease;
+}
+
+.timeline-node.left::after {
+    right: 0;
+}
+
+.timeline-node.right::after {
+    left: 0;
+}
+
+/* Active State */
+.timeline-node.active::before {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px var(--color-accent);
+    transform: scale(1.2);
+}
+
+.timeline-node.active::after {
+    background: var(--color-accent);
+    opacity: 1;
+    width: 3.5rem;
+}
+
+/* Content Box Styling */
+.node-content {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0.3;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.timeline-node.active .node-content {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: rgba(242, 201, 76, 0.3);
+    background: linear-gradient(145deg, rgba(15, 47, 24, 0.9), rgba(10, 30, 15, 0.9));
+}
+
+.node-content h4 {
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Living Leaf Visualization --- */
+
+@keyframes rotateBeam {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes particleFlow {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+.living-leaf-stage {
+    perspective: 1000px;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.particle.sun {
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    box-shadow: 0 0 5px #FFD700;
+}
+
+.particle.water {
+    width: 6px;
+    height: 6px;
+    background: #00BFFF;
+    box-shadow: 0 0 5px #00BFFF;
+}
+
+.particle.co2 {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.leaf-core {
+    transition: transform 0.2s ease-out;
+}
+
+@media (max-width: 900px) {
+    .main-nav .container {
+        flex-wrap: wrap;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-links {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+    }
+
+    .main-nav.nav-open .nav-links {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-link,
+    .btn-donate {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    h2 {
+        font-size: 2.1rem;
+    }
+}

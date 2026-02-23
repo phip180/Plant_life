@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Plants are life. Explore the critical importance of plant life to Earth and humanity.">
+    <title>Plants Are Life | The Foundation</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Inline styles for page-specific needs -->
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-bg);
+            position: relative;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* Photosynthesis Visualization */
+        .process-viz {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="main-nav" aria-label="Main navigation">
+        <div class="container">
+            <a href="index.html" class="logo">PlantLife&trade;</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-links">Menu</button>
+            <ul class="nav-links" id="primary-nav-links">
+                <li><a href="index.html" class="nav-link active" aria-current="page">Life</a></li>
+                <li><a href="humanity.html" class="nav-link">Humanity</a></li>
+                <li><a href="threats.html" class="nav-link">Threats</a></li>
+                <li><a href="protect.html" class="btn-donate">Act Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="creator-banner" role="note" aria-label="Copyright and creator notice">
+        <div class="container">
+            <p><strong>&copy; 2026 PlantLife&trade;</strong> All Rights Reserved. Website Creator:
+                <strong>Luggya Phillip Reuben</strong>.</p>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <header class="hero">
+            <img src="assets/hero.png" alt="A lush, ancient forest with sunlight filtering through canopy"
+                class="hero-bg" id="hero-bg">
+            <canvas id="particle-canvas"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"></canvas>
+
+            <div class="container hero-content">
+                <h1>The Breath of the World</h1>
+                <p>Before us, before history, there was the forest.<br>Every breath you take was a gift from them.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="#breathe" class="nav-link"
+                        style="border-bottom: 1px solid var(--color-text-main);">Explore</a>
+                </div>
+            </div>
+        </header>
+
+        <section id="breathe" class="stats-section">
+            <div class="container">
+                <div class="stat-grid" id="stat-grid">
+                    <div class="stat-card">
+                        <h3>98%</h3>
+                        <p>Total share of Earth's biomass</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>28%</h3>
+                        <p>Oxygen produced by rainforests</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>3 Trillion</h3>
+                        <p>Trees currently on Earth</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--spacing-xxl);">
+                    <button id="btn-toggle-life" class="btn-donate"
+                        style="background: transparent; border: 2px solid var(--color-accent); color: var(--color-accent);">
+                        Hold to See a World Without Plants
+                    </button>
+                    <p id="life-toggle-status" class="ui-note" aria-live="polite">Press and hold to preview the impact
+                        of plant loss.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photosynthesis Scrollytelling Section -->
+        <section class="process-viz" id="photosynthesis">
+            <div class="container" style="text-align: center; position: relative;">
+                <div style="margin-bottom: var(--spacing-xl);">
+                    <h2>An Invisible Engine</h2>
+                    <p>Scroll to see how light becomes life.</p>
+                </div>
+
+                <!-- Animation Stage -->
+                <!-- Living Leaf Animation Stage -->
+                <div class="photo-stage living-leaf-stage"
+                    style="position: relative; height: 600px; max-width: 1000px; margin: 0 auto; overflow: hidden; border-radius: 30px; background: radial-gradient(circle at center, #0F2F18 0%, #000000 70%); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 50px rgba(0,0,0,0.5);">
+
+                    <!-- Ambient Light Beams -->
+                    <div class="light-beam"
+                        style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 215, 0, 0.05) 20deg, transparent 40deg); animation: rotateBeam 20s linear infinite;">
+                    </div>
+
+                    <!-- The Living Leaf (Central Actor) -->
+                    <div class="leaf-core" id="living-leaf-core"
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                        <!-- SVG Leaf drawn with CSS/SVG -->
+                        <svg viewBox="0 0 100 100" width="100%" height="100%"
+                            style="filter: drop-shadow(0 0 20px #4CAF50);">
+                            <path d="M50 95 C 20 95, 0 50, 50 5 C 100 50, 80 95, 50 95 Z" fill="#2E7D32"
+                                stroke="#66BB6A" stroke-width="2" />
+                            <path d="M50 5 Q 50 50 50 95" fill="none" stroke="#66BB6A" stroke-width="1" opacity="0.5" />
+                            <path d="M50 25 Q 20 40 15 35" fill="none" stroke="#66BB6A" stroke-width="1"
+                                opacity="0.3" />
+                            <path d="M50 45 Q 80 60 85 55" fill="none" stroke="#66BB6A" stroke-width="1"
+                                opacity="0.3" />
+                            <path d="M50 65 Q 20 80 15 75" fill="none" stroke="#66BB6A" stroke-width="1"
+                                opacity="0.3" />
+                        </svg>
+                        <div class="leaf-glow"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(76, 175, 80, 0.4) 0%, transparent 70%); animation: pulseGlow 4s ease-in-out infinite;">
+                        </div>
+                    </div>
+
+                    <!-- Input Streams (Particles) -->
+                    <div class="stream-container" id="stream-sun"
+                        style="position: absolute; top: 10%; left: 10%; text-align: center;">
+                        <span
+                            style="font-size: 2rem; display: block; margin-bottom: 0.5rem; text-shadow: 0 0 10px gold;">☀️</span>
+                        <span
+                            style="color: #FFD700; font-family: var(--font-heading); letter-spacing: 0.1em;">LIGHT</span>
+                        <div class="particles type-sun"
+                            style="position: absolute; top: 100%; left: 50%; width: 2px; height: 200px; /* JS will populate particles */">
+                        </div>
+                    </div>
+
+                    <div class="stream-container" id="stream-water"
+                        style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); text-align: center;">
+                        <span
+                            style="font-size: 2rem; display: block; margin-bottom: 0.5rem; text-shadow: 0 0 10px cyan;">💧</span>
+                        <span
+                            style="color: #00BFFF; font-family: var(--font-heading); letter-spacing: 0.1em;">WATER</span>
+                        <div class="particles type-water"></div>
+                    </div>
+
+                    <div class="stream-container" id="stream-co2"
+                        style="position: absolute; top: 50%; left: 5%; transform: translateY(-50%); text-align: left;">
+                        <span
+                            style="font-size: 2rem; display: inline-block; vertical-align: middle; text-shadow: 0 0 10px grey;">🌫️</span>
+                        <span
+                            style="color: #A0A0A0; font-family: var(--font-heading); letter-spacing: 0.1em;">CO₂</span>
+                        <div class="particles type-co2"></div>
+                    </div>
+
+                    <!-- Output Burst -->
+                    <div class="output-burst" id="output-oxygen"
+                        style="position: absolute; top: 50%; right: 10%; transform: translateY(-50%); text-align: right; opacity: 0; transition: opacity 1s;">
+                        <span
+                            style="color: #FFFFFF; font-family: var(--font-heading); letter-spacing: 0.1em; font-size: 1.5rem; text-shadow: 0 0 20px white;">OXYGEN</span>
+                        <span
+                            style="font-size: 3rem; display: inline-block; vertical-align: middle; margin-left: 1rem;">💨</span>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="scroll-prompt"
+                        style="position: absolute; bottom: 20px; width: 100%; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5);">
+                        Photosynthesis: <span id="synthesis-progress" aria-live="polite"
+                            style="color: var(--color-accent);">0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" aria-label="Site copyright">
+        <div class="container">
+            <p>&copy; 2026 PlantLife&trade; | Created by <strong>Luggya Phillip Reuben</strong> | All Rights
+                Reserved.</p>
+        </div>
+    </footer>
+    <div class="creator-watermark" role="note" aria-label="Creator watermark">
+        &copy; PlantLife&trade; | <strong>Luggya Phillip Reuben</strong>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

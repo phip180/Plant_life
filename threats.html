@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Witness the threats facing our planet's plant life and the hope that remains.">
+    <title>Threats & Hope | The Turning Point</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .comparison-section {
+            padding: var(--spacing-xxl) 0;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        /* Content Sections */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .impact-card {
+            background: #2a2a2a;
+            padding: var(--spacing-lg);
+            border-left: 4px solid var(--color-alert);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="main-nav" aria-label="Main navigation">
+        <div class="container">
+            <a href="index.html" class="logo">PlantLife&trade;</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-links">Menu</button>
+            <ul class="nav-links" id="primary-nav-links">
+                <li><a href="index.html" class="nav-link">Life</a></li>
+                <li><a href="humanity.html" class="nav-link">Humanity</a></li>
+                <li><a href="threats.html" class="nav-link active" aria-current="page">Threats</a></li>
+                <li><a href="protect.html" class="btn-donate">Act Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="creator-banner" role="note" aria-label="Copyright and creator notice">
+        <div class="container">
+            <p><strong>&copy; 2026 PlantLife&trade;</strong> All Rights Reserved. Website Creator:
+                <strong>Luggya Phillip Reuben</strong>.</p>
+        </div>
+    </div>
+
+    <main style="padding-top: 80px;">
+        <div class="container" style="text-align: center; margin-bottom: var(--spacing-lg);">
+            <h1>The Vanishing</h1>
+            <p>Every second, a forest the size of a football field is lost. We are trading long-term survival for
+                short-term gain.</p>
+        </div>
+
+        <section class="comparison-section" aria-label="Deforestation Comparison" id="vanishing-section">
+            <div class="container">
+                <h2>Witness the Change</h2>
+                <p>Drag the slider. Watch the world burn.</p>
+                <p class="ui-note compact">Slide left or right to compare forest health versus deforestation.</p>
+
+                <div class="vanishing-container"
+                    style="position: relative; width: 1000px; height: 600px; margin: 40px auto; overflow: hidden; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+                    <canvas id="vanishing-canvas" width="1000" height="600"></canvas>
+
+                    <!-- Hidden Source Images -->
+                    <img id="img-before" src="assets/rainforest_before.png" style="display: none;">
+                    <img id="img-after" src="assets/rainforest_after.png" style="display: none;">
+
+                    <!-- Custom Range Input (Invisible overlay) -->
+                    <input type="range" min="0" max="100" value="50" id="vanish-slider"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 20;">
+
+                    <!-- Visual Handle (Controlled by JS) -->
+                    <div id="vanish-handle"
+                        style="position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: rgba(255, 69, 0, 0.8); pointer-events: none; z-index: 10; box-shadow: 0 0 20px 5px rgba(255, 69, 0, 0.5);">
+                        <div
+                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: #FF4500; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 0 30px #FF4500;">
+                            &harr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="impact-grid">
+                <div class="impact-card" id="biodiversity-card">
+                    <h3>Biodiversity Loss</h3>
+                    <div
+                        style="position: relative; height: 200px; margin: 1rem 0; background: rgba(0,0,0,0.3); border-radius: 4px; overflow: hidden;">
+                        <canvas id="impact-map" width="400" height="200"></canvas>
+                        <div id="loss-counter"
+                            aria-live="polite"
+                            style="position: absolute; bottom: 10px; left: 10px; font-family: monospace; color: #ff6b6b; font-weight: bold;">
+                            -000 hectares</div>
+                    </div>
+                    <p>80% of Earth's land animals live in forests. Watch the hotspots pulse where life is disappearing
+                        fastest.</p>
+                </div>
+                <div class="impact-card" style="border-left-color: #5DADE2;">
+                    <h3>Climate Accelerator</h3>
+                    <p>Trees are our best technology for carbon capture. Deforestation not only stops this absorption
+                        but releases stored carbon back into the atmosphere.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Hope Section (Visual TransitionTarget) -->
+    <section id="hope-section"
+        style="padding: 100px 0; text-align: center; opacity: 0; transform: translateY(50px); transition: all 1s ease;">
+        <div class="container">
+            <h2 style="font-size: 3rem; color: #1a1a1a; margin-bottom: 2rem;">But Life is Resilient.</h2>
+            <p style="font-size: 1.5rem; color: #2e4a33; max-width: 700px; margin: 0 auto 3rem;">
+                When we stop the destruction, nature returns.
+                <br><strong>Forests can heal.</strong>
+            </p>
+            <a href="protect.html" class="btn-donate"
+                style="background: #2e4a33; color: white; padding: 1rem 3rem; font-size: 1.2rem; display: inline-block;">Start
+                the Healing</a>
+        </div>
+    </section>
+
+    <footer class="site-footer" aria-label="Site copyright">
+        <div class="container">
+            <p>&copy; 2026 PlantLife&trade; | Created by <strong>Luggya Phillip Reuben</strong> | All Rights
+                Reserved.</p>
+        </div>
+    </footer>
+    <div class="creator-watermark" role="note" aria-label="Creator watermark">
+        &copy; PlantLife&trade; | <strong>Luggya Phillip Reuben</strong>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/visualizations.js"></script>
+</body>
+
+</html>
