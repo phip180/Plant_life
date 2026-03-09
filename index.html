@@ -4,505 +4,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Plants are life. Explore the critical importance of plant life to Earth and humanity.">
-    <title>Plants Are Life | The Foundation</title>
+    <meta name="description" content="Luggya Phillip Reuben — Full-stack developer. Portfolio showcasing school management systems, dashboards, and web applications.">
+    <title>Luggya Phillip Reuben | Full-Stack Developer</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Inline styles for page-specific needs -->
-    <style>
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: var(--spacing-xxl) 0;
-            background: var(--color-bg);
-            position: relative;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-xl);
-            text-align: center;
-        }
-
-        .stat-card h3 {
-            font-size: 3rem;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        /* Photosynthesis Visualization */
-        .process-viz {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .process-story-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: var(--spacing-lg);
-            align-items: start;
-            margin-top: var(--spacing-xl);
-        }
-
-        .process-panel {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 1.25rem;
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
-            text-align: left;
-        }
-
-        .phase-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.35rem 0.7rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            border: 1px solid rgba(242, 201, 76, 0.3);
-            background: rgba(242, 201, 76, 0.08);
-        }
-
-        .phase-title {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin: 0.9rem 0 0.35rem;
-            color: var(--color-text-main);
-        }
-
-        .phase-copy {
-            color: var(--color-text-muted);
-            margin-bottom: 0.75rem;
-        }
-
-        .phase-links {
-            display: grid;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .phase-link {
-            display: block;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 0.85rem 0.95rem;
-            background: rgba(255, 255, 255, 0.02);
-            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-            color: var(--color-text-main);
-        }
-
-        .phase-link:hover {
-            transform: translateY(-2px);
-            border-color: rgba(242, 201, 76, 0.3);
-            background: rgba(242, 201, 76, 0.04);
-        }
-
-        .phase-link strong {
-            display: block;
-            color: var(--color-accent);
-            margin-bottom: 0.15rem;
-            letter-spacing: 0.03em;
-        }
-
-        .phase-link span {
-            color: var(--color-text-muted);
-            font-size: 0.9rem;
-        }
-
-        .process-mini-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
-            margin-top: 0.75rem;
-        }
-
-        .mini-stat {
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.02);
-            padding: 0.75rem;
-        }
-
-        .mini-stat-label {
-            display: block;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-text-muted);
-        }
-
-        .mini-stat-value {
-            display: block;
-            margin-top: 0.3rem;
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            color: var(--color-accent);
-        }
-
-        .synthesis-hud {
-            position: absolute;
-            left: 20px;
-            right: 20px;
-            bottom: 18px;
-            z-index: 15;
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 0.85rem 0.9rem;
-            backdrop-filter: blur(8px);
-            text-align: left;
-        }
-
-        .synthesis-hud-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.55rem;
-            flex-wrap: wrap;
-        }
-
-        .synthesis-hud-label {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .synthesis-hud-phase {
-            color: var(--color-accent);
-            font-weight: 600;
-            letter-spacing: 0.04em;
-        }
-
-        .synthesis-progress-track {
-            position: relative;
-            height: 8px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            overflow: hidden;
-            margin-bottom: 0.65rem;
-        }
-
-        .synthesis-progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #FFD700, #7ED957, #D8FFFF);
-            border-radius: inherit;
-            box-shadow: 0 0 14px rgba(242, 201, 76, 0.35);
-            transition: width 0.15s ease-out;
-        }
-
-        .synthesis-phase-markers {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-        }
-
-        .synthesis-phase-marker {
-            font-size: 0.72rem;
-            padding: 0.35rem 0.5rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.02);
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .synthesis-phase-marker.active {
-            color: var(--color-text-main);
-            border-color: rgba(242, 201, 76, 0.28);
-            background: rgba(242, 201, 76, 0.08);
-        }
-
-        @media (max-width: 900px) {
-            .process-story-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-mini-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .synthesis-hud {
-                left: 12px;
-                right: 12px;
-                bottom: 12px;
-                padding: 0.7rem;
-            }
-
-            .synthesis-phase-markers {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
     <nav class="main-nav" aria-label="Main navigation">
         <div class="container">
-            <a href="index.html" class="logo">PlantLife&trade;</a>
+            <a href="#home" class="logo">LPR</a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-links">Menu</button>
             <ul class="nav-links" id="primary-nav-links">
-                <li><a href="index.html" class="nav-link active" aria-current="page">Life</a></li>
-                <li><a href="humanity.html" class="nav-link">Humanity</a></li>
-                <li><a href="threats.html" class="nav-link">Threats</a></li>
-                <li><a href="protect.html" class="btn-donate">Act Now</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="btn-donate">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <main id="main-content">
-        <header class="hero">
-            <img src="assets/hero.png" alt="A lush, ancient forest with sunlight filtering through canopy"
-                class="hero-bg" id="hero-bg">
-            <canvas id="particle-canvas"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"></canvas>
 
+        <!-- Hero Section -->
+        <header class="hero" id="home">
+            <canvas id="particle-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;"></canvas>
             <div class="container hero-content">
-                <div class="ui-pill" style="margin: 0 auto 1rem; width: fit-content;">Chapter 1 · Life</div>
-                <h1>The Breath of the World</h1>
-                <p>Before us, before history, there was the forest. Every breath you take was a gift from it.</p>
-                <div style="margin-top: 2rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="#breathe" class="nav-link"
-                        style="border-bottom: 1px solid var(--color-text-main);">Explore</a>
-                    <a href="protect.html" class="btn-donate">Take Action Now</a>
+                <div class="ui-pill" style="margin:0 auto 1rem;width:fit-content;">Full-Stack Developer</div>
+                <h1>Luggya Phillip Reuben</h1>
+                <p>I build robust web applications — from school management platforms to multi-tenant dashboards — with modern JavaScript, Node.js, and PostgreSQL.</p>
+                <div style="margin-top:2rem;display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;">
+                    <a href="#projects" class="btn-donate">View Projects</a>
+                    <a href="#contact" class="btn-secondary" style="text-decoration:none;">Get in Touch</a>
                 </div>
             </div>
         </header>
 
-        <section id="breathe" class="stats-section flow-reveal">
-            <div class="container flow-reveal">
+        <div class="section-divider"></div>
+
+        <!-- About Section -->
+        <section id="about" class="portfolio-section flow-reveal">
+            <div class="container">
                 <div class="section-header">
-                    <h2>Planetary Dependence</h2>
-                    <span class="ui-pill">Systems View</span>
+                    <h2>About Me</h2>
+                    <span class="ui-pill">Background</span>
                 </div>
-                <div class="stat-grid" id="stat-grid">
-                    <div class="stat-card">
-                        <h3>98%</h3>
-                        <p>Total share of Earth's biomass</p>
+                <div class="about-grid">
+                    <div class="about-photo flow-reveal">
+                        <div class="photo-placeholder">
+                            <span>LP</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <h3>28%</h3>
-                        <p>Oxygen produced by rainforests</p>
+                    <div class="about-text flow-reveal">
+                        <p>I'm a full-stack developer based in Uganda, passionate about building scalable web applications that solve real-world problems. My primary focus is on education technology — designing and deploying school management systems that streamline administration, communication, and data management.</p>
+                        <p>I work across the entire stack: crafting responsive frontends with React and Vite, building RESTful APIs with Node.js and Express, managing data with PostgreSQL and Prisma, and handling deployment on Linux servers with Nginx and PM2.</p>
+                        <p style="color:var(--color-accent);font-weight:500;">Currently building and maintaining SteadyFast — a multi-tenant school management platform serving real institutions.</p>
                     </div>
-                    <div class="stat-card">
-                        <h3>3 Trillion</h3>
-                        <p>Trees currently on Earth</p>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: var(--spacing-xxl);">
-                    <button id="btn-toggle-life" class="btn-donate"
-                        style="background: transparent; border: 2px solid var(--color-accent); color: var(--color-accent);">
-                        Hold to See a World Without Plants
-                    </button>
-                    <p id="life-toggle-status" class="ui-note" aria-live="polite">Press and hold to preview the impact
-                        of plant loss.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Photosynthesis Scrollytelling Section -->
-        <div class="flow-bridge flow-reveal" aria-hidden="true">
-            <div class="flow-kicker">From Scale to Mechanism</div>
-            <p>These global numbers exist because millions of leaves quietly run the same process every day.</p>
-            <span class="flow-line"></span>
-        </div>
+        <div class="section-divider"></div>
 
-        <section class="process-viz flow-reveal" id="photosynthesis">
-            <div class="container flow-reveal" style="text-align: center; position: relative;">
-                <div style="margin-bottom: var(--spacing-xl);">
-                    <div class="ui-pill" style="margin: 0 auto 1rem; width: fit-content;">Interactive · Scroll</div>
-                    <h2>An Invisible Engine</h2>
-                    <p>Scroll to watch photosynthesis happen, then see why it powers every chapter of this story.</p>
+        <!-- Projects Section -->
+        <section id="projects" class="portfolio-section flow-reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Projects</h2>
+                    <span class="ui-pill">Live on This Server</span>
                 </div>
+                <div class="projects-grid">
 
-                <!-- Animation Stage -->
-                <!-- Living Leaf Animation Stage -->
-                <div class="photo-stage living-leaf-stage"
-                    style="position: relative; height: 600px; max-width: 1000px; margin: 0 auto; overflow: hidden; border-radius: 30px; background: radial-gradient(circle at center, #0F2F18 0%, #000000 70%); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 50px rgba(0,0,0,0.5);">
-
-                    <!-- Ambient Light Beams -->
-                    <div class="light-beam"
-                        style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 215, 0, 0.05) 20deg, transparent 40deg); animation: rotateBeam 20s linear infinite;">
-                    </div>
-
-                    <!-- The Living Leaf (Central Actor) -->
-                    <div class="leaf-core" id="living-leaf-core"
-                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; z-index: 10;">
-                        <!-- SVG Leaf drawn with CSS/SVG -->
-                        <svg viewBox="0 0 100 100" width="100%" height="100%"
-                            style="filter: drop-shadow(0 0 20px #4CAF50);">
-                            <path d="M50 95 C 20 95, 0 50, 50 5 C 100 50, 80 95, 50 95 Z" fill="#2E7D32"
-                                stroke="#66BB6A" stroke-width="2" />
-                            <path d="M50 5 Q 50 50 50 95" fill="none" stroke="#66BB6A" stroke-width="1" opacity="0.5" />
-                            <path d="M50 25 Q 20 40 15 35" fill="none" stroke="#66BB6A" stroke-width="1"
-                                opacity="0.3" />
-                            <path d="M50 45 Q 80 60 85 55" fill="none" stroke="#66BB6A" stroke-width="1"
-                                opacity="0.3" />
-                            <path d="M50 65 Q 20 80 15 75" fill="none" stroke="#66BB6A" stroke-width="1"
-                                opacity="0.3" />
-                        </svg>
-                        <div class="leaf-glow"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(76, 175, 80, 0.4) 0%, transparent 70%); animation: pulseGlow 4s ease-in-out infinite;">
+                    <div class="project-card flow-reveal">
+                        <div class="project-header">
+                            <h3>SteadyFast School Management System</h3>
+                            <span class="project-status live">Live</span>
                         </div>
-                    </div>
-
-                    <!-- Input Streams (Particles) -->
-                    <div class="stream-container" id="stream-sun"
-                        style="position: absolute; top: 10%; left: 10%; text-align: center;">
-                        <span
-                            style="font-size: 2rem; display: block; margin-bottom: 0.5rem; text-shadow: 0 0 10px gold;">☀️</span>
-                        <span
-                            style="color: #FFD700; font-family: var(--font-heading); letter-spacing: 0.1em;">LIGHT</span>
-                        <div class="particles type-sun"
-                            style="position: absolute; top: 100%; left: 50%; width: 2px; height: 200px; /* JS will populate particles */">
+                        <p>Full-stack school management platform handling student enrollment, grading, attendance, fee tracking, and parent communication for multiple schools.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Vite</span>
+                            <span class="tech-pill">PostgreSQL</span>
+                            <span class="tech-pill">Prisma</span>
+                            <span class="tech-pill">Nginx</span>
                         </div>
+                        <a href="http://138.68.241.113" class="project-link" target="_blank" rel="noopener">Visit Site &rarr;</a>
                     </div>
 
-                    <div class="stream-container" id="stream-water"
-                        style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); text-align: center;">
-                        <span
-                            style="font-size: 2rem; display: block; margin-bottom: 0.5rem; text-shadow: 0 0 10px cyan;">💧</span>
-                        <span
-                            style="color: #00BFFF; font-family: var(--font-heading); letter-spacing: 0.1em;">WATER</span>
-                        <div class="particles type-water"></div>
-                    </div>
-
-                    <div class="stream-container" id="stream-co2"
-                        style="position: absolute; top: 50%; left: 5%; transform: translateY(-50%); text-align: left;">
-                        <span
-                            style="font-size: 2rem; display: inline-block; vertical-align: middle; text-shadow: 0 0 10px grey;">🌫️</span>
-                        <span
-                            style="color: #A0A0A0; font-family: var(--font-heading); letter-spacing: 0.1em;">CO₂</span>
-                        <div class="particles type-co2"></div>
-                    </div>
-
-                    <!-- Output Burst -->
-                    <div class="output-burst" id="output-oxygen"
-                        style="position: absolute; top: 50%; right: 10%; transform: translateY(-50%); text-align: right; opacity: 0; transition: opacity 1s;">
-                        <span
-                            style="color: #FFFFFF; font-family: var(--font-heading); letter-spacing: 0.1em; font-size: 1.5rem; text-shadow: 0 0 20px white;">OXYGEN</span>
-                        <span
-                            style="font-size: 3rem; display: inline-block; vertical-align: middle; margin-left: 1rem;">💨</span>
-                    </div>
-
-                    <div class="synthesis-hud" aria-label="Photosynthesis progress panel">
-                        <div class="synthesis-hud-top">
-                            <div class="synthesis-hud-label">
-                                Photosynthesis: <span id="synthesis-progress" aria-live="polite"
-                                    style="color: var(--color-accent);">0%</span>
-                            </div>
-                            <div class="synthesis-hud-phase" id="synthesis-stage-label">Capturing inputs</div>
+                    <div class="project-card flow-reveal">
+                        <div class="project-header">
+                            <h3>Super Dashboard</h3>
+                            <span class="project-status live">Live</span>
                         </div>
-                        <div class="synthesis-progress-track" aria-hidden="true">
-                            <div class="synthesis-progress-fill" id="synthesis-progress-fill"></div>
+                        <p>Multi-tenant admin panel for managing school instances, monitoring system health, provisioning new tenants, and overseeing platform-wide data.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Vite</span>
+                            <span class="tech-pill">PostgreSQL</span>
                         </div>
-                        <div class="synthesis-phase-markers" aria-hidden="true">
-                            <div class="synthesis-phase-marker active" id="synthesis-marker-1">Capture</div>
-                            <div class="synthesis-phase-marker" id="synthesis-marker-2">Convert</div>
-                            <div class="synthesis-phase-marker" id="synthesis-marker-3">Release</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="process-story-grid">
-                    <div class="process-panel">
-                        <span class="phase-chip" id="synthesis-phase-chip">Phase 1 · Capture</span>
-                        <h3 class="phase-title" id="synthesis-phase-title">The leaf gathers energy and raw materials</h3>
-                        <p class="phase-copy" id="synthesis-phase-copy">
-                            Sunlight, water, and carbon dioxide are pulled into the system. This is the intake stage that makes life production possible.
-                        </p>
-                        <div class="process-mini-grid">
-                            <div class="mini-stat">
-                                <span class="mini-stat-label">Inputs</span>
-                                <span class="mini-stat-value" id="synthesis-inputs">Light + Water + CO₂</span>
-                            </div>
-                            <div class="mini-stat">
-                                <span class="mini-stat-label">Output</span>
-                                <span class="mini-stat-value" id="synthesis-output">Pending</span>
-                            </div>
-                            <div class="mini-stat">
-                                <span class="mini-stat-label">Human Meaning</span>
-                                <span class="mini-stat-value" id="synthesis-meaning">Breath starts here</span>
-                            </div>
-                        </div>
+                        <a href="http://138.68.241.113:3000" class="project-link" target="_blank" rel="noopener">Visit Dashboard &rarr;</a>
                     </div>
 
-                    <aside class="process-panel" aria-label="Why this matters">
-                        <div class="ui-pill" style="margin-bottom: 0.8rem;">Why This Matters</div>
-                        <p id="synthesis-impact-copy" class="phase-copy" style="margin-bottom: 0.75rem;">
-                            Photosynthesis is the upstream process behind food, medicine, forest resilience, and climate stability.
-                        </p>
-                        <div class="phase-links">
-                            <a href="humanity.html" class="phase-link">
-                                <strong>Humanity</strong>
-                                <span>Plants become food systems, medicine, materials, and civilization infrastructure.</span>
-                            </a>
-                            <a href="threats.html" class="phase-link">
-                                <strong>Threats</strong>
-                                <span>Destroying forests weakens oxygen production, biodiversity, and carbon capture capacity.</span>
-                            </a>
-                            <a href="protect.html" class="phase-link">
-                                <strong>Act Now</strong>
-                                <span>Protecting plant systems protects the engine that supports every other outcome.</span>
-                            </a>
+                    <div class="project-card flow-reveal">
+                        <div class="project-header">
+                            <h3>Merryland School Instance</h3>
+                            <span class="project-status live">Live</span>
                         </div>
-                    </aside>
+                        <p>A deployed tenant of the SteadyFast school system, serving a real school with customized configuration, branding, and data isolation.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">PostgreSQL</span>
+                            <span class="tech-pill">Multi-Tenant</span>
+                        </div>
+                        <a href="http://138.68.241.113:8081" class="project-link" target="_blank" rel="noopener">Visit Instance &rarr;</a>
+                    </div>
+
+                    <div class="project-card flow-reveal">
+                        <div class="project-header">
+                            <h3>SteadyFast Website</h3>
+                            <span class="project-status offline">Offline</span>
+                        </div>
+                        <p>Marketing landing page for the SteadyFast school platform, featuring product information, image optimization with Sharp, and a responsive design.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Express</span>
+                            <span class="tech-pill">HTML/CSS/JS</span>
+                            <span class="tech-pill">Sharp</span>
+                        </div>
+                        <span class="project-link disabled">Not Currently Live</span>
+                    </div>
+
+                    <div class="project-card flow-reveal">
+                        <div class="project-header">
+                            <h3>Plant Life</h3>
+                            <span class="project-status archive">Archive</span>
+                        </div>
+                        <p>Interactive environmental awareness site with canvas visualizations, scroll-synced animations, procedural particle generation, and rich storytelling.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">HTML/CSS/JS</span>
+                            <span class="tech-pill">Canvas API</span>
+                            <span class="tech-pill">ScrollSync</span>
+                        </div>
+                        <span class="project-link disabled">Replaced by This Portfolio</span>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <div class="chapter-next flow-reveal" aria-label="Continue to next chapter">
-            <div class="chapter-next-inner">
-                <div class="chapter-next-copy">
-                    <div class="ui-pill" style="margin-bottom: 0.6rem;">Next Chapter · Humanity</div>
-                    <h3>Follow the energy into human life</h3>
-                    <p>See how this same plant engine becomes food systems, medicine, materials, and civilization.</p>
+        <div class="section-divider"></div>
+
+        <!-- Skills Section -->
+        <section id="skills" class="portfolio-section flow-reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Tech Stack</h2>
+                    <span class="ui-pill">Skills</span>
                 </div>
-                <div class="chapter-next-actions">
-                    <a href="humanity.html" class="btn-donate">Continue to Humanity</a>
-                    <a href="#breathe" class="btn-secondary" style="text-decoration: none;">Revisit the Stats</a>
+                <div class="skills-categories">
+
+                    <div class="skill-category flow-reveal">
+                        <h3>Frontend</h3>
+                        <div class="tech-pills">
+                            <span class="tech-pill">JavaScript</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Vite</span>
+                            <span class="tech-pill">HTML/CSS</span>
+                            <span class="tech-pill">Canvas API</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category flow-reveal">
+                        <h3>Backend</h3>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">Express</span>
+                            <span class="tech-pill">Prisma</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category flow-reveal">
+                        <h3>Database</h3>
+                        <div class="tech-pills">
+                            <span class="tech-pill">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category flow-reveal">
+                        <h3>DevOps</h3>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Nginx</span>
+                            <span class="tech-pill">PM2</span>
+                            <span class="tech-pill">Git</span>
+                            <span class="tech-pill">DigitalOcean</span>
+                            <span class="tech-pill">Linux</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="portfolio-section flow-reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get in Touch</h2>
+                    <span class="ui-pill">Contact</span>
+                </div>
+                <div class="contact-card flow-reveal">
+                    <p>Interested in working together or have a project in mind? Reach out anytime.</p>
+                    <div class="contact-links">
+                        <a href="mailto:lugyaphillip@gmail.com" class="contact-link">
+                            <span class="contact-label">Email</span>
+                            <span class="contact-value">lugyaphillip@gmail.com</span>
+                        </a>
+                        <a href="https://github.com/phip180" class="contact-link" target="_blank" rel="noopener">
+                            <span class="contact-label">GitHub</span>
+                            <span class="contact-value">github.com/phip180</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
     <footer class="site-footer" aria-label="Site copyright">
         <div class="container">
-            <p>&copy; 2026 PlantLife&trade; | Created by <strong>Luggya Phillip Reuben</strong> | All Rights
-                Reserved.</p>
+            <p>&copy; 2026 <strong>Luggya Phillip Reuben</strong> | All Rights Reserved.</p>
         </div>
     </footer>
-    <div class="creator-watermark" role="note" aria-label="Creator watermark">
-        &copy; PlantLife&trade; | <strong>Luggya Phillip Reuben</strong>
-    </div>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">&uarr;</button>
 
     <script src="js/main.js"></script>
 </body>

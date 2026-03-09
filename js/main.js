@@ -3,19 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('page-loaded');
     });
 
-    // --- 1. GLOBAL UI ---
-    // Parallax Effect
-    const heroBg = document.querySelector('.hero-bg');
-    if (heroBg) {
-        window.addEventListener('scroll', () => {
-            const scrollValue = window.scrollY;
-            if (scrollValue < window.innerHeight) {
-                heroBg.style.transform = `translateY(${scrollValue * 0.4}px) scale(1.1)`;
-            }
-        });
-    }
-
-    // Navbar Scroll Effect
+    // --- NAV ---
     const nav = document.querySelector('.main-nav');
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -38,51 +26,115 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- NAV SCROLL EFFECTS ---
+    let lastScrollY = window.scrollY;
+
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        if (!nav) return;
+        const currentY = window.scrollY;
+
+        // Background darken
+        if (currentY > 50) {
             nav.style.background = 'rgba(6, 18, 10, 0.9)';
             nav.style.boxShadow = '0 14px 32px rgba(0,0,0,0.28)';
         } else {
             nav.style.background = 'rgba(6, 18, 10, 0.72)';
             nav.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.22)';
         }
+
+        // Hide on scroll down, show on scroll up
+        if (currentY > 100 && currentY > lastScrollY) {
+            nav.classList.add('nav-hidden');
+        } else {
+            nav.classList.remove('nav-hidden');
+        }
+
+        lastScrollY = currentY;
     });
 
-    // Intersection Observer
-    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    // --- ACTIVE NAV LINK ON SCROLL ---
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navItems = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const top = section.offsetTop - 120;
+            if (window.scrollY >= top) {
+                current = section.getAttribute('id');
+            }
+        });
+        navItems.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // --- BACK TO TOP ---
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // --- SCROLL REVEAL ---
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Only trigger once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.stat-card, .process-viz, .timeline-node, .flow-reveal').forEach((el, index) => {
-        if (el.classList.contains('flow-reveal')) {
-            el.style.setProperty('--flow-delay', `${(index % 5) * 60}ms`);
-        }
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+    document.querySelectorAll('.flow-reveal').forEach((el, index) => {
+        el.style.setProperty('--flow-delay', `${(index % 5) * 60}ms`);
         observer.observe(el);
     });
 
-    // Inject visible class style
-    if (!document.getElementById('dynamic-styles')) {
-        const style = document.createElement('style');
-        style.id = 'dynamic-styles';
-        style.innerHTML = `.visible { opacity: 1 !important; transform: translateY(0) !important; }`;
-        document.head.appendChild(style);
+    // --- TYPED TEXT EFFECT ---
+    const heroP = document.querySelector('.hero-content > p');
+    if (heroP) {
+        const fullText = heroP.textContent;
+        heroP.textContent = '';
+        const cursor = document.createElement('span');
+        cursor.className = 'typed-cursor';
+        heroP.appendChild(cursor);
+
+        let i = 0;
+        setTimeout(() => {
+            function typeChar() {
+                if (i < fullText.length) {
+                    heroP.insertBefore(document.createTextNode(fullText[i]), cursor);
+                    i++;
+                    setTimeout(typeChar, 35);
+                } else {
+                    // Remove cursor after typing finishes
+                    setTimeout(() => cursor.remove(), 2000);
+                }
+            }
+            typeChar();
+        }, 2000);
     }
 
-
-    // --- 2. PARTICLE SYSTEM (Index Page) ---
+    // --- PARTICLE CANVAS WITH CONNECTIONS ---
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
+        const CONNECTION_DISTANCE = 120;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -95,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1; // 1 to 3px
+                this.size = Math.random() * 2 + 1;
                 this.speedX = Math.random() * 0.5 - 0.25;
                 this.speedY = Math.random() * 0.5 - 0.25;
                 this.opacity = Math.random() * 0.5 + 0.1;
@@ -109,364 +161,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (this.y > canvas.height) this.y = 0;
             }
             draw() {
-                ctx.fillStyle = `rgba(242, 201, 76, ${this.opacity})`; // Gold color
+                ctx.fillStyle = `rgba(242, 201, 76, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        function initParticles() {
-            for (let i = 0; i < 50; i++) {
-                particles.push(new Particle());
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < CONNECTION_DISTANCE) {
+                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+                        ctx.strokeStyle = `rgba(242, 201, 76, ${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
             }
         }
 
-        function animateParticles() {
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => {
                 p.update();
                 p.draw();
             });
-            requestAnimationFrame(animateParticles);
+            drawConnections();
+            requestAnimationFrame(animate);
         }
-
-        initParticles();
-        animateParticles();
+        animate();
     }
-
-
-    // --- 3. AUDIO CONTROL ---
-    const audioBtn = document.getElementById('audio-toggle');
-    const audio = document.getElementById('forest-audio');
-    if (audioBtn && audio) {
-        audioBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().catch(e => console.log("Audio play blocked by browser policy until interaction"));
-                document.getElementById('icon-sound-off').style.display = 'none';
-                document.getElementById('icon-sound-on').style.display = 'block';
-            } else {
-                audio.pause();
-                document.getElementById('icon-sound-off').style.display = 'block';
-                document.getElementById('icon-sound-on').style.display = 'none';
-            }
-        });
-    }
-
-
-    // --- 4. "WHAT DISAPPEARS" INTREACTIVE ---
-    const toggleBtn = document.getElementById('btn-toggle-life');
-    const lifeToggleStatus = document.getElementById('life-toggle-status');
-    if (toggleBtn) {
-        const startEffect = () => {
-            document.body.classList.add('life-toggled');
-            toggleBtn.innerText = "Release to Restore Life";
-            if (lifeToggleStatus) lifeToggleStatus.innerText = "Life dimmed. Release to restore the ecosystem.";
-        };
-        const endEffect = () => {
-            document.body.classList.remove('life-toggled');
-            toggleBtn.innerText = "Hold to See a World Without Plants";
-            if (lifeToggleStatus) lifeToggleStatus.innerText = "Press and hold to preview the impact of plant loss.";
-        };
-
-        // Mouse
-        toggleBtn.addEventListener('mousedown', startEffect);
-        toggleBtn.addEventListener('mouseup', endEffect);
-        toggleBtn.addEventListener('mouseleave', endEffect);
-
-        // Touch
-        toggleBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startEffect(); });
-        toggleBtn.addEventListener('touchend', endEffect);
-    }
-
-
-    // --- 5. PHOTOSYNTHESIS SCROLLYTELLING (LIVING LEAF VERSION) ---
-    const photoSection = document.getElementById('photosynthesis');
-    const leafCore = document.getElementById('living-leaf-core');
-    const progressSpan = document.getElementById('synthesis-progress');
-    const oxyBurst = document.getElementById('output-oxygen');
-    const stage = document.querySelector('.living-leaf-stage');
-    const phaseChip = document.getElementById('synthesis-phase-chip');
-    const phaseTitle = document.getElementById('synthesis-phase-title');
-    const phaseCopy = document.getElementById('synthesis-phase-copy');
-    const impactCopy = document.getElementById('synthesis-impact-copy');
-    const inputsText = document.getElementById('synthesis-inputs');
-    const outputText = document.getElementById('synthesis-output');
-    const meaningText = document.getElementById('synthesis-meaning');
-    const stageLabel = document.getElementById('synthesis-stage-label');
-    const progressFill = document.getElementById('synthesis-progress-fill');
-    const marker1 = document.getElementById('synthesis-marker-1');
-    const marker2 = document.getElementById('synthesis-marker-2');
-    const marker3 = document.getElementById('synthesis-marker-3');
-
-    // Particle Spawner
-    function spawnParticle(type, startX, startY, destX, destY) {
-        if (!stage) return;
-
-        const p = document.createElement('div');
-        p.className = `particle ${type}`;
-
-        // Randomize start slightly
-        const randX = (Math.random() - 0.5) * 40;
-        const randY = (Math.random() - 0.5) * 40;
-
-        p.style.left = `calc(${startX} + ${randX}px)`;
-        p.style.top = `calc(${startY} + ${randY}px)`;
-
-        // Vector to center (approximate for demo)
-        p.style.setProperty('--tx', `${destX}px`);
-        p.style.setProperty('--ty', `${destY}px`);
-
-        p.style.animation = `particleFlow ${1.5 + Math.random()}s ease-in forwards`;
-
-        stage.appendChild(p);
-
-        setTimeout(() => { p.remove(); }, 2500);
-    }
-
-    if (photoSection) {
-        const setSynthesisNarrative = (progress) => {
-            if (!phaseTitle || !phaseCopy) return;
-            if (progressFill) progressFill.style.width = `${progress}%`;
-
-            [marker1, marker2, marker3].forEach(m => m && m.classList.remove('active'));
-
-            if (progress < 35) {
-                if (marker1) marker1.classList.add('active');
-                if (phaseChip) phaseChip.innerText = 'Phase 1 · Capture';
-                if (stageLabel) stageLabel.innerText = 'Capturing inputs';
-                phaseTitle.innerText = 'The leaf gathers energy and raw materials';
-                phaseCopy.innerText = 'Sunlight, water, and carbon dioxide are drawn into the process. This intake stage is the foundation of plant-powered life.';
-                if (impactCopy) impactCopy.innerText = 'Without this first step, there is no food web, no plant growth, and no reliable oxygen cycle to sustain complex life.';
-                if (inputsText) inputsText.innerText = 'Light + Water + CO₂';
-                if (outputText) outputText.innerText = 'Pending';
-                if (meaningText) meaningText.innerText = 'Breath starts here';
-            } else if (progress < 75) {
-                if (marker2) marker2.classList.add('active');
-                if (phaseChip) phaseChip.innerText = 'Phase 2 · Convert';
-                if (stageLabel) stageLabel.innerText = 'Converting energy';
-                phaseTitle.innerText = 'Energy is converted into stored life';
-                phaseCopy.innerText = 'Inside the leaf, light energy drives chemical reactions that build sugars. Plants store energy before ecosystems can use it.';
-                if (impactCopy) impactCopy.innerText = 'This conversion is the hidden supply chain behind crops, forests, medicines, fibers, and nearly every land-based food system.';
-                if (inputsText) inputsText.innerText = 'Light drives reaction';
-                if (outputText) outputText.innerText = 'Glucose forming';
-                if (meaningText) meaningText.innerText = 'Food + growth';
-            } else {
-                if (marker3) marker3.classList.add('active');
-                if (phaseChip) phaseChip.innerText = 'Phase 3 · Release';
-                if (stageLabel) stageLabel.innerText = 'Releasing oxygen';
-                phaseTitle.innerText = 'Oxygen and stored energy support the world above the leaf';
-                phaseCopy.innerText = 'As the process completes, oxygen is released and plant biomass accumulates. The result powers breathing, habitats, and climate regulation.';
-                if (impactCopy) impactCopy.innerText = 'This is where the whole site connects: human survival, forest loss risk, and conservation action all depend on protecting this engine.';
-                if (inputsText) inputsText.innerText = 'Cycle sustained';
-                if (outputText) outputText.innerText = 'O₂ + Biomass';
-                if (meaningText) meaningText.innerText = 'Climate buffer';
-            }
-        };
-
-        window.addEventListener('scroll', () => {
-            const rect = photoSection.getBoundingClientRect();
-            const center = window.innerHeight / 2;
-
-            // Interaction zone
-            if (rect.top < center + 200 && rect.bottom > center - 200) {
-                // Calculate progress 0-100%
-                let progress = 1 - (rect.top / center);
-                progress = Math.min(Math.max(progress, 0), 1) * 100;
-
-                if (progressSpan) progressSpan.innerText = Math.floor(progress) + '%';
-                setSynthesisNarrative(progress);
-
-                // Scale leaf
-                if (leafCore) {
-                    const scale = 1 + (progress / 200);
-                    leafCore.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                }
-
-                // Spawn Particles
-                if (Math.random() < (progress / 200)) {
-                    spawnParticle('sun', '20%', '20%', 150, 150);
-                }
-                if (Math.random() < (progress / 200)) {
-                    spawnParticle('water', '50%', '80%', 0, -150);
-                }
-                if (Math.random() < (progress / 200)) {
-                    spawnParticle('co2', '10%', '50%', 200, 0);
-                }
-
-                // Output Trigger
-                if (progress > 85) {
-                    if (oxyBurst) {
-                        oxyBurst.style.opacity = '1';
-                        oxyBurst.style.transform = 'translateY(-50%) scale(1.1)';
-                    }
-                } else {
-                    if (oxyBurst) {
-                        oxyBurst.style.opacity = '0';
-                        oxyBurst.style.transform = 'translateY(-50%) scale(1)';
-                    }
-                }
-            }
-        });
-    }
-
-
-    // --- 6. PAGE 2: RELIANCE CALCULATOR ---
-    const param = document.querySelectorAll('.calc-item input');
-    const scoreDisplay = document.getElementById('plant-score');
-    const scoreContainer = document.querySelector('.score-display');
-    const calcReset = document.getElementById('calc-reset');
-
-    if (param.length > 0 && scoreDisplay) {
-        const updatePlantScore = () => {
-            let total = 0;
-            let checkedCount = 0;
-            param.forEach(i => {
-                if (i.checked) {
-                    total += parseInt(i.value);
-                    checkedCount++;
-                }
-            });
-
-            scoreDisplay.innerText = Math.min(100, total + 20); // Base 20% for breathing ;)
-
-            if (scoreContainer) {
-                scoreContainer.style.opacity = checkedCount > 0 ? '1' : '0';
-            }
-        };
-
-        param.forEach(input => {
-            input.addEventListener('change', updatePlantScore);
-        });
-
-        if (calcReset) {
-            calcReset.addEventListener('click', () => {
-                param.forEach(input => { input.checked = false; });
-                updatePlantScore();
-            });
-        }
-
-        param.forEach(input => {
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    input.checked = !input.checked;
-                    input.dispatchEvent(new Event('change', { bubbles: true }));
-                }
-            });
-        });
-    }
-
-    // Soft page transitions for internal navigation
-    document.querySelectorAll('a[href]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (!href || href.startsWith('#') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-
-            let url;
-            try {
-                url = new URL(href, window.location.href);
-            } catch {
-                return;
-            }
-
-            const isSameOrigin = url.origin === window.location.origin;
-            const isHtmlPage = url.pathname.endsWith('.html') || !url.pathname.includes('.');
-            if (!isSameOrigin || !isHtmlPage) return;
-
-            e.preventDefault();
-            document.body.classList.add('page-leaving');
-            setTimeout(() => {
-                window.location.href = url.href;
-            }, 260);
-        });
-    });
-
-    // --- 7. PAGE 2: DEEP ZOOM CARDS ---
-    const cards = document.querySelectorAll('.plant-card');
-    const grid = document.getElementById('medicinal-grid');
-
-    if (grid && cards.length > 0) {
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                // If already expanded, close it
-                if (card.classList.contains('expanded')) {
-                    card.classList.remove('expanded');
-                    card.innerHTML = card.dataset.originalHtml; // Restore
-                } else {
-                    // Close others
-                    cards.forEach(c => {
-                        if (c.classList.contains('expanded')) {
-                            c.classList.remove('expanded');
-                            c.innerHTML = c.dataset.originalHtml;
-                        }
-                    });
-
-                    // Save original state if not saved
-                    if (!card.dataset.originalHtml) {
-                        card.dataset.originalHtml = card.innerHTML;
-                    }
-
-                    // Expand this one
-                    card.classList.add('expanded');
-
-                    // Inject chemical info
-                    const chem = card.dataset.chemical;
-                    const desc = card.dataset.desc;
-
-                    card.innerHTML = `
-                        <div style="text-align: center; width: 100%;">
-                            <h3 style="font-size: 2.5rem; color: var(--color-accent); margin-bottom: 0;">${chem}</h3>
-                            <p style="font-family: var(--font-heading); font-style: italic; margin-bottom: 1rem;">Plant-derived medicine snapshot</p>
-                            <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
-                                <p style="font-size: 1.1rem; line-height: 1.6;">${desc}</p>
-                            </div>
-                            <button class="btn-donate" style="background: transparent; border: 1px solid var(--color-text-muted); font-size: 0.8rem; padding: 0.5rem 1rem;">Close Card</button>
-                        </div>
-                    `;
-
-                    // Re-bind click to close (bubbling handles it, but verify target)
-                }
-            });
-        });
-    }
-
-    // --- 8. PAGE 2: VERTICAL ROOT TIMELINE ---
-    const rootLine = document.querySelector('.root-progress');
-    const nodes = document.querySelectorAll('.timeline-node');
-
-    if (rootLine && nodes.length > 0) {
-        window.addEventListener('scroll', () => {
-            const section = document.querySelector('.timeline-section');
-            const rect = section.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            // Calculate progress through the section
-            const start = windowHeight * 0.8;
-            const end = -rect.height + windowHeight * 0.5;
-
-            // Simplified logic: Map scroll to height %
-            // When section top is at windowHeight, 0%. When section bottom is at windowHeight, 100%.
-
-            let percentage = (windowHeight - rect.top) / (rect.height + windowHeight * 0.5) * 100;
-            percentage = Math.max(0, Math.min(100, percentage));
-
-            rootLine.style.height = `${percentage}%`;
-
-            // Activate nodes as line passes them
-            nodes.forEach(node => {
-                const nodeRect = node.getBoundingClientRect();
-                const nodeTop = nodeRect.top - rect.top; // Relative to section
-
-                // If the root line (height %) has passed this node's relative top %
-                const nodePercent = (nodeTop / rect.height) * 100;
-
-                if (percentage > nodePercent) {
-                    node.classList.add('active');
-                } else {
-                    node.classList.remove('active');
-                }
-            });
-        });
-    }
-
 });
